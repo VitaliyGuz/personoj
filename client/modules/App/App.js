@@ -2,7 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 // Import Style
-import styles from './App.css';
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {deepOrange500} from 'material-ui/styles/colors';
+import AppBar from 'material-ui/AppBar';
+import {Link} from 'react-router';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -10,6 +18,27 @@ import DevTools from './components/DevTools';
 
 // Import Actions
 import {switchLanguage} from '../../modules/Intl/IntlActions';
+import {fetchPeople} from '../Person/PersonActions';
+import {fetchPersonAttributes} from '../Person/PersonActions';
+
+const styles = {
+  main: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  container: {
+    maxWidth: 980,
+    textAlign: 'center',
+    paddingTop: 100,
+    margin: '0 auto'
+  }
+};
+
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  }
+});
 
 export class App extends Component {
   constructor(props) {
@@ -18,15 +47,17 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(fetchPeople);
+    this.props.dispatch(fetchPersonAttributes);
     this.setState({isMounted: true}); // eslint-disable-line
   }
 
 
   render() {
     return (
-      <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
-        <div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div style={styles.main}>
+          {/*{this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}*/}
           <Helmet
             title="MERN Starter - Blog App"
             titleTemplate="%s - Blog App"
@@ -42,13 +73,15 @@ export class App extends Component {
               },
             ]}
           />
+          <AppBar title="MERN Starter - Blog App"/>
+          <Link to="/person-attributes/new">New attribute</Link>
 
-          <div className={styles.container}>
+
+          <div style={styles.container}>
             {this.props.children}
           </div>
-
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -1,9 +1,14 @@
-import Express from 'express';
+import Express, {Router} from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
+import passport from 'passport';
+import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
+import User from './models/user';
+import Person from './models/person';
+import PersonAttribute from './models/personAttribute';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -17,7 +22,7 @@ const app = new Express();
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}));
   app.use(webpackHotMiddleware(compiler));
 }
 
@@ -33,6 +38,11 @@ import Helmet from 'react-helmet';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import serverConfig from './config';
+import users from './routes/user.routes'
+import auth from './routes/auth.routes'
+import people from './routes/person.routes'
+import personAttributes from './routes/personAttribute.routes'
+
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -49,9 +59,34 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
-app.use(bodyParser.json({ limit: '20mb' }));
-app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+app.use(bodyParser.json({limit: '20mb'}));
+app.use(bodyParser.urlencoded({limit: '20mb', extended: false}));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+
+var opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = serverConfig.JWT_TOKEN;
+
+passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+  User.findOne({cuid: jwt_payload.sub}).then(user => {
+    if (user) {
+      done(null, user);
+    } else {
+      done(null, false);
+    }
+  }).catch(err => {
+    return done(err, false);
+  });
+}));
+
+let protectedMiddleware = passport.authenticate('jwt', {session: false});
+
+app.use('/api', users(new Router(), protectedMiddleware))
+app.use('/api', auth(new Router(), protectedMiddleware))
+app.use('/api', people(new Router(), protectedMiddleware))
+app.use('/api', personAttributes(new Router(), protectedMiddleware))
+
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {

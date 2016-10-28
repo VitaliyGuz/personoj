@@ -5,6 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
+import {restoreAuthenticationTokenFromCache} from '../client/modules/User/UserAction';
 
 export function configureStore(initialState = {}) {
   // Middleware and store enhancers
@@ -18,6 +19,9 @@ export function configureStore(initialState = {}) {
   }
 
   const store = createStore(rootReducer, initialState, compose(...enhancers));
+
+  // make token available before page is rendering
+  store.dispatch(restoreAuthenticationTokenFromCache());
 
   // For hot reloading reducers
   if (module.hot) {

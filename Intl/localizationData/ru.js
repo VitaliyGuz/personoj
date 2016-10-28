@@ -1,0 +1,22 @@
+export default {
+  locale: 'ru',
+  messages: {
+    siteTitle: 'MERN Starter Blog',
+    switchLanguage: 'Switch Language',
+    userLogin: 'Электронный адресс',
+    userPassword: 'Пароль',
+    registrationForm: 'Регистрация',
+    registration: 'Зарегастрироваться',
+    loginForm: 'Вход',
+    enter: 'Войти',
+    personList: 'Граждани',
+    personAttributeList: 'Реквизиты физ лиц',
+    name: 'Наименование',
+    type: 'Тип',
+    values: 'Значение',
+    localizationLabel: 'Описание',
+    allowArbitraryValues: 'Разрешить занчения не из списка',
+    needApproval: 'Необходимо подтверждение',
+    save: 'Сохранить',
+  },
+};

@@ -1,7 +1,7 @@
 // list of available languages
 export const enabledLanguages = [
-  'en',
-  'fr',
+  'ru',
+  'uk',
 ];
 
 // this object will have language-specific data added to it which will be placed in the state when that language is active
@@ -49,16 +49,16 @@ function flattenMessages(nestedMessages = {}, prefix = '') {
 }
 
 // bring in intl polyfill, react-intl, and app-specific language data
-import 'intl/locale-data/jsonp/en';
-import en from 'react-intl/locale-data/en';
-import enData from './localizationData/en';
-addLocaleData(en);
-localizationData.en = enData;
-localizationData.en.messages = flattenMessages(localizationData.en.messages);
+import 'intl/locale-data/jsonp/ru';
+import ru from 'react-intl/locale-data/ru';
+import ruData from './localizationData/ru';
+addLocaleData(ru);
+localizationData.ru = ruData;
+localizationData.ru.messages = flattenMessages(localizationData.ru.messages);
 
-import 'intl/locale-data/jsonp/fr';
-import fr from 'react-intl/locale-data/fr';
-import frData from './localizationData/fr';
-addLocaleData(fr);
-localizationData.fr = frData;
-localizationData.fr.messages = flattenMessages(localizationData.fr.messages);
+import 'intl/locale-data/jsonp/uk';
+import ua from 'react-intl/locale-data/uk';
+import uaData from './localizationData/uk';
+addLocaleData(ua);
+localizationData.ua = uaData;
+localizationData.ua.messages = flattenMessages(localizationData.ua.messages);
