@@ -12,6 +12,10 @@ import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import MenuItem from 'material-ui/MenuItem'
+import SelectField from 'material-ui/SelectField'
+import Subheader from 'material-ui/Subheader'
+
+
 
 // Import Components
 
@@ -32,7 +36,7 @@ const handleChange = (event, index, value) => {
 
 function PersonAttributeForm(props) {
   const languageNodes = props.intl.enabledLanguages.map(
-    lang => <TextField key={lang} hintText={lang}/>
+    lang => <TextField key={lang} name={lang} hintText={lang} onChange={props.onLanguageChange}/>
   )
   return (
     <div style={styles.container}>
@@ -43,37 +47,24 @@ function PersonAttributeForm(props) {
                  value={props.name}
                  name="name"
                  onChange={props.onChangeTextField}/>
-      <TextField hintText={props.intl.messages.type}
-                 value={props.type}
-                 name="type"
-                 onChange={props.onChangeTextField}/>
-      {/*<SelectField
-        floatingLabelText="Ready?"
-        value={selectValue}
-        onChange={handleChange}
-      >
-        <MenuItem value={null} primaryText=""/>
-        <MenuItem value={false} primaryText="No"/>
-        <MenuItem value={true} primaryText="Yes"/>
-      </SelectField>
-      <SelectField floatingLabelText={props.intl.messages.type}
+      <SelectField hintText={props.intl.messages.type}
                    name="type"
                    value={props.type}
-                   onChange={props.onChangeSelectField}>
+                   onChange={props.onChangeSelectField.bind(null, "type")}>
         <MenuItem value={null} primaryText=""/>
-        <MenuItem value={'String'} primaryText="String"/>
-        <MenuItem value={'Number'} primaryText="Number"/>
-        <MenuItem value={'Date'} primaryText="Date"/>
-        <MenuItem value={'Boolean'} primaryText="Boolean"/>
-      </SelectField>*/}
+        <MenuItem value={'String'} primaryText={props.intl.messages.string}/>
+        <MenuItem value={'Number'} primaryText={props.intl.messages.number}/>
+        <MenuItem value={'Date'} primaryText={props.intl.messages.date}/>
+        <MenuItem value={'Boolean'} primaryText={props.intl.messages.boolean}/>
+      </SelectField>
       <TextField hintText={props.intl.messages.values}
                  value={props.values}
                  multiLine={true}
-                 rows={2}
+                 rows={1}
                  rowsMax={5}
                  name="values"
                  onChange={props.onChangeTextField}/>
-      <FormattedMessage id="localizationLabel"/>
+      <Subheader><FormattedMessage id="localizationLabel"/></Subheader>
       {languageNodes}
       <Checkbox label={props.intl.messages.allowArbitraryValues}
                 name="allowArbitraryValues"

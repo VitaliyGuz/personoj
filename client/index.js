@@ -6,10 +6,13 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './App';
 import { configureStore } from './store';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');
+
+injectTapEventPlugin();
 
 render(
   <AppContainer>

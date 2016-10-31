@@ -18,5 +18,9 @@ export default {
     allowArbitraryValues: 'Дозволити значення, які не в списку',
     needApproval: 'Необхідне підтвердження',
     save: 'Зберегти',
+    string: 'Строка',
+    number: 'Номер',
+    date: 'Дата',
+    boolean: 'Логічний'
   },
 };

@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
 
 import {getPerson} from '../PersonReducer'
 
+import PersonDetail from '../components/PersonDetail'
+
+
 export class PersonDetailPage extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +19,9 @@ export class PersonDetailPage extends Component {
   render() {
     return (
       <div>
-        <span>{this.props.person.cuid}</span>
+        <PersonDetail intl={this.props.intl}
+                      person={this.props.person}>
+        </PersonDetail>
       </div>
     );
   }
@@ -26,9 +31,10 @@ PersonDetailPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(store, props) {
   return {
-    person: getPerson(state, props.params.cuid),
+    intl: store.intl,
+    person: getPerson(store, props.params.cuid),
   };
 }
 

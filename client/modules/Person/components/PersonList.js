@@ -31,7 +31,10 @@ function PersonList(props) {
       <h2><FormattedMessage id="personList"/></h2>
       {
         props.people.map(person => (
-          <span>{person.cuid}</span>
+          <Link to={`/people/${person.cuid}`}
+                key={person.cuid}>
+            <span>{person.cuid}</span>
+          </Link>
         ))
       }
 
@@ -45,7 +48,6 @@ function PersonList(props) {
 }
 
 PersonList.propTypes = {
-  people: {},
   intl: intlShape.isRequired,
 };
 

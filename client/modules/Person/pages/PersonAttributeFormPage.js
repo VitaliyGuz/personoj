@@ -13,19 +13,30 @@ import {addPersonAttributeRequest} from '../PersonActions'
 export class PersonAttributeFormPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      name:'',
+      type: '',
+      values: '',
+      localizationLabel: {},
+      allowArbitraryValues: false
+    }
   }
 
   onChangeTextField = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
 
-  onChangeSelectField = (event, index, value) => {
-    this.setState({[event.target.name]: value});
+  onChangeSelectField = (name, event, index, value) => {
+    this.setState({[name]: value});
   };
 
   onChangeCheckbox = (event, isInputChecked) => {
     this.setState({[event.target.name]: isInputChecked});
+  };
+
+  onLanguageChange = (event) => {
+    let localizationLabel = Object.assign(this.state.localizationLabel, {[event.target.name]: event.target.value});
+    this.setState({'localizationLabel': localizationLabel});
   };
 
   addPersonAttribute = () => {
@@ -33,7 +44,7 @@ export class PersonAttributeFormPage extends Component {
       name: this.state.name,
       type: this.state.type,
       values: this.state.values.split('\n'),
-      localizationLabel: {},
+      localizationLabel: this.state.localizationLabel,
       allowArbitraryValues: this.state.allowArbitraryValues,
       needApproval: this.state.needApproval
     };
@@ -52,6 +63,7 @@ export class PersonAttributeFormPage extends Component {
                              onChangeTextField={this.onChangeTextField}
                              onChangeSelectField={this.onChangeSelectField}
                              onChangeCheckbox={this.onChangeCheckbox}
+                             onLanguageChange={this.onLanguageChange}
                              addPersonAttribute={this.addPersonAttribute}>
 
         </PersonAttributeForm>

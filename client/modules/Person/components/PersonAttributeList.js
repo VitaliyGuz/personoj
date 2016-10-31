@@ -32,7 +32,10 @@ function PersonAttributeList(props) {
       <h2><FormattedMessage id="personAttributeList"/></h2>
       {
         props.personAttributes.map(personAttribute => (
-          <span>{personAttribute.cuid}</span>
+          <Link to={`/person-attributes/${personAttribute.cuid}`}
+                key={personAttribute.cuid}>
+            <span>{personAttribute.cuid}</span>
+          </Link>
         ))
       }
       <Link to="/person-attributes/new">

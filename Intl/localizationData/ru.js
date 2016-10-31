@@ -18,5 +18,9 @@ export default {
     allowArbitraryValues: 'Разрешить занчения не из списка',
     needApproval: 'Необходимо подтверждение',
     save: 'Сохранить',
+    string: 'Строка',
+    number: 'Номер',
+    date: 'Дата',
+    boolean: 'Логический'
   },
 };

@@ -7,7 +7,7 @@ import cuid from "cuid";
 import sanitizeHtml from "sanitize-html";
 
 export function getPeople(req, res) {
-  Person.find().exec((err, people) => {
+  Person.find({}, {published: 1, cuid: 1}).exec((err, people) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -16,7 +16,7 @@ export function getPeople(req, res) {
 }
 
 export function getPerson(req, res) {
-  Person.findOne({cuid: req.params.cuid}).exec((err, person) => {
+  Person.findOne({cuid: req.params.cuid}, {published: 1}).exec((err, person) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -55,18 +55,21 @@ export function confirmPersonChanges(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-    var nextIndex = Math.max(0, ...Object.keys(person.history||{}).map) + 1;
-    let historyItem = {[nextIndex]: {person: person.published, dateRetired: new Date()}}
-    person.history = Object.assign(person.history||{} , historyItem);
-    person.published = person.draft;
-    person.draft = {};
-
-    person.save((err, saved) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.json({person: saved});
-    });
+    if (Object.keys(person.draft).length !== 0) {
+      let nextIndex = Object.keys(person.history || {}).length + 1
+      let historyItem = {[nextIndex]: {person: person.published, dateRetired: new Date()}}
+      person.history = Object.assign(person.history || {}, historyItem);
+      person.published = person.draft;
+      person.draft = {};
+      person.save((err, saved) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        res.json({person: saved});
+      });
+    } else {
+      res.json({person: person});
+    }
   });
 }
 

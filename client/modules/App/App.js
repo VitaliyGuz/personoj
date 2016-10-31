@@ -13,6 +13,7 @@ import {fetchPeople, fetchPersonAttributes} from "../Person/PersonActions";
 
 // Import Style
 
+import {Tabs, Tab} from 'material-ui';
 
 // Import Components
 
@@ -25,7 +26,6 @@ const styles = {
   },
   container: {
     maxWidth: 980,
-    textAlign: 'center',
     paddingTop: 100,
     margin: '0 auto'
   }
@@ -47,7 +47,7 @@ export class App extends Component {
     this.props.dispatch(fetchPeople());
     this.props.dispatch(fetchPersonAttributes());
     this.setState({isMounted: true}); // eslint-disable-line
-    this.setState({open: true}); // eslint-disable-line
+    this.setState({open: false}); // eslint-disable-line
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -86,6 +86,10 @@ export class App extends Component {
             <Link to="/person-attributes"><MenuItem primaryText="Attributes" onTouchTap={this.handleClose}/></Link>
           </Drawer>
 
+          {/*<Tabs value={pathname}>
+            <Tab label="Home" value="/" linkButton containerElement={<Link to="/"/>}/>
+            <Tab label="Test" value="/test" linkButton containerElement={<Link to="/test"/>}/>
+          </Tabs>*/}
 
           <div style={styles.container}>
             {this.props.children}
