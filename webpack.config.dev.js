@@ -4,7 +4,7 @@ var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   entry: {
     app: [
@@ -23,7 +23,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'app.js',
-    publicPath: 'http://0.0.0.0:8000/',
+    publicPath: 'http://localhost:8000/',
   },
 
   resolve: {

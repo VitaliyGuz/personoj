@@ -2,14 +2,15 @@
  * Created by Vitaliy on 28.10.2016.
  */
 
+//noinspection JSUnresolvedVariable
 import React, {PropTypes} from 'react';
+//noinspection JSUnresolvedVariable
 import {FormattedMessage} from 'react-intl'
 
 // Import Style
 import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
-import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
 // Import Components
@@ -23,6 +24,11 @@ const styles = {
   }
 }
 
+let selectValue = null;
+
+const handleChange = (event, index, value) => {
+  selectValue = value
+}
 
 function PersonAttributeForm(props) {
   const languageNodes = props.intl.enabledLanguages.map(
@@ -37,6 +43,19 @@ function PersonAttributeForm(props) {
                  value={props.name}
                  name="name"
                  onChange={props.onChangeTextField}/>
+      <TextField hintText={props.intl.messages.type}
+                 value={props.type}
+                 name="type"
+                 onChange={props.onChangeTextField}/>
+      {/*<SelectField
+        floatingLabelText="Ready?"
+        value={selectValue}
+        onChange={handleChange}
+      >
+        <MenuItem value={null} primaryText=""/>
+        <MenuItem value={false} primaryText="No"/>
+        <MenuItem value={true} primaryText="Yes"/>
+      </SelectField>
       <SelectField floatingLabelText={props.intl.messages.type}
                    name="type"
                    value={props.type}
@@ -46,7 +65,7 @@ function PersonAttributeForm(props) {
         <MenuItem value={'Number'} primaryText="Number"/>
         <MenuItem value={'Date'} primaryText="Date"/>
         <MenuItem value={'Boolean'} primaryText="Boolean"/>
-      </SelectField>
+      </SelectField>*/}
       <TextField hintText={props.intl.messages.values}
                  value={props.values}
                  multiLine={true}
@@ -63,7 +82,8 @@ function PersonAttributeForm(props) {
                 name="needApproval"
                 onCheck={props.onChangeCheckbox}/>
       <RaisedButton label={props.intl.messages.save}
-                    primary={true}/>
+                    primary={true}
+                    onClick={props.addPersonAttribute}/>
     </div>
   )
 }

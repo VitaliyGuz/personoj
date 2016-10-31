@@ -5,7 +5,7 @@
 import {ADD_PERSON, ADD_PEOPLE, DELETE_PERSON, REPLACE_PERSON, ADD_PERSON_ATTRIBUTE, ADD_PERSON_ATTRIBUTES} from './PersonActions';
 
 // Initial State
-const initialState = {data: []};
+const initialState = {data: [], attributes: []};
 
 const PersonReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -36,7 +36,7 @@ const PersonReducer = (state = initialState, action) => {
     case ADD_PERSON_ATTRIBUTE :
       return {
         ...state,
-        attributes: [action.personAttributes, ...state.attributes],
+        attributes: [action.personAttribute, ...state.attributes],
       };
 
     case ADD_PERSON_ATTRIBUTES :

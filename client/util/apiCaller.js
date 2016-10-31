@@ -1,13 +1,15 @@
 import fetch from 'isomorphic-fetch';
 import Config from '../../server/config';
 
+//noinspection JSUnresolvedVariable
 export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
   process.env.BASE_URL || (`http://localhost:${process.env.PORT || Config.port}/api`) :
   '/api';
 
 export default function callApi(endpoint, method = 'get', body) {
+  //noinspection JSUnresolvedFunction
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { 'content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', "Authorization": 'JWT ' + getAuthenticationToken() },
     method,
     body: JSON.stringify(body),
   })
@@ -24,3 +26,10 @@ export default function callApi(endpoint, method = 'get', body) {
     error => error
   );
 }
+
+
+export const getAuthenticationToken = () => {
+  if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+    return localStorage.authentication_token
+  }
+};

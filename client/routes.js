@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
-import React from 'react';
-import {Route, IndexRedirect} from 'react-router';
-import App from './modules/App/App';
+import React from "react";
+import {Route, IndexRedirect} from "react-router";
+import App from "./modules/App/App";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -19,9 +19,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/User/pages/RegistrationPage');
   require('./modules/User/pages/SignInPage');
   /*require('./modules/Person/pages/PersonListPage');
-  require('./modules/Person/pages/PersonDetailPage');
-  require('./modules/Person/pages/PersonAttributeListPage');
-  require('./modules/Person/pages/PersonAttributeDetailPage');*/
+   require('./modules/Person/pages/PersonDetailPage');
+   require('./modules/Person/pages/PersonAttributeListPage');
+   require('./modules/Person/pages/PersonAttributeDetailPage');*/
   require('./modules/Person/pages/PersonAttributeFormPage');
 }
 
@@ -44,7 +44,13 @@ export default (
              });
            }}
     />
-{/*    <Route path="/people"
+    <Route path="/people/new"
+           getComponent={(nextState, cb) => {
+             require.ensure([], require => {
+               cb(null, require('./modules/Person/pages/PersonFormPage').default);
+             });
+           }}/>
+    <Route path="/people"
            getComponent={(nextState, cb) => {
              require.ensure([], require => {
                cb(null, require('./modules/Person/pages/PersonListPage').default);
@@ -57,14 +63,14 @@ export default (
                });
              }}
       />
-    </Route>*/}
+    </Route>
     <Route path="/person-attributes/new"
            getComponent={(nextState, cb) => {
              require.ensure([], require => {
                cb(null, require('./modules/Person/pages/PersonAttributeFormPage').default);
              });
            }}/>
-   {/* <Route path="/personAttributes"
+    <Route path="/person-attributes"
            getComponent={(nextState, cb) => {
              require.ensure([], require => {
                cb(null, require('./modules/Person/pages/PersonAttributeListPage').default);
@@ -76,6 +82,6 @@ export default (
                  cb(null, require('./modules/Person/pages/PersonAttributeDetailPage').default);
                });
              }}/>
-    </Route>*/}
+    </Route>
   </Route>
 );

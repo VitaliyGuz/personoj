@@ -25,7 +25,7 @@ export function getPersonAttribute(req, res) {
 }
 
 export function addPersonAttribute(req, res) {
-  if (!req.body.person) {
+  if (!req.body.personAttribute) {
     res.status(403).end();
   } else {
 

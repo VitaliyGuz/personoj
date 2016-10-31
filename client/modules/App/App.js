@@ -1,25 +1,22 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import {deepOrange500} from "material-ui/styles/colors";
+import AppBar from "material-ui/AppBar";
+import {Link} from "react-router";
+import Drawer from "material-ui/Drawer";
+import MenuItem from "material-ui/MenuItem";
+import Helmet from "react-helmet";
+import DevTools from "./components/DevTools";
+import {fetchPeople, fetchPersonAttributes} from "../Person/PersonActions";
 
 // Import Style
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {deepOrange500} from 'material-ui/styles/colors';
-import AppBar from 'material-ui/AppBar';
-import {Link} from 'react-router';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-
 
 // Import Components
-import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
 
 // Import Actions
-import {switchLanguage} from '../../modules/Intl/IntlActions';
-import {fetchPeople} from '../Person/PersonActions';
-import {fetchPersonAttributes} from '../Person/PersonActions';
 
 const styles = {
   main: {
@@ -47,17 +44,21 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchPeople);
-    this.props.dispatch(fetchPersonAttributes);
+    this.props.dispatch(fetchPeople());
+    this.props.dispatch(fetchPersonAttributes());
     this.setState({isMounted: true}); // eslint-disable-line
+    this.setState({open: true}); // eslint-disable-line
   }
 
+  handleToggle = () => this.setState({open: !this.state.open});
+
+  handleClose = () => this.setState({open: false});
 
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.main}>
-          {/*{this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}*/}
+          {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <Helmet
             title="MERN Starter - Blog App"
             titleTemplate="%s - Blog App"
@@ -73,8 +74,17 @@ export class App extends Component {
               },
             ]}
           />
-          <AppBar title="MERN Starter - Blog App"/>
-          <Link to="/person-attributes/new">New attribute</Link>
+          <AppBar title="MERN Starter - Blog App"
+                  onLeftIconButtonTouchTap={this.handleToggle}/>
+          <Drawer
+            docked={false}
+            width={200}
+            open={this.state.open}
+            onRequestChange={(open) => this.setState({open})}
+          >
+            <Link to="/people"><MenuItem primaryText="People" onTouchTap={this.handleClose}/></Link>
+            <Link to="/person-attributes"><MenuItem primaryText="Attributes" onTouchTap={this.handleClose}/></Link>
+          </Drawer>
 
 
           <div style={styles.container}>
@@ -85,6 +95,11 @@ export class App extends Component {
     );
   }
 }
+App.need = [() => {
+  return fetchPeople();
+}, () => {
+  return fetchPersonAttributes();
+}];
 
 App.propTypes = {
   children: PropTypes.object.isRequired,

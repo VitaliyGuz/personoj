@@ -7,6 +7,8 @@ import {connect} from 'react-redux'
 
 import PersonAttributeForm from '../components/PersonAttributeForm'
 
+import {addPersonAttributeRequest} from '../PersonActions'
+
 
 export class PersonAttributeFormPage extends Component {
   constructor(props) {
@@ -26,6 +28,18 @@ export class PersonAttributeFormPage extends Component {
     this.setState({[event.target.name]: isInputChecked});
   };
 
+  addPersonAttribute = () => {
+    let personAttribute = {
+      name: this.state.name,
+      type: this.state.type,
+      values: this.state.values.split('\n'),
+      localizationLabel: {},
+      allowArbitraryValues: this.state.allowArbitraryValues,
+      needApproval: this.state.needApproval
+    };
+    this.props.dispatch(addPersonAttributeRequest(personAttribute))
+  };
+
   render() {
     return (
       <div>
@@ -37,7 +51,8 @@ export class PersonAttributeFormPage extends Component {
                              needApproval={this.state.needApproval}
                              onChangeTextField={this.onChangeTextField}
                              onChangeSelectField={this.onChangeSelectField}
-                             onChangeCheckbox={this.onChangeCheckbox}>
+                             onChangeCheckbox={this.onChangeCheckbox}
+                             addPersonAttribute={this.addPersonAttribute}>
 
         </PersonAttributeForm>
       </div>

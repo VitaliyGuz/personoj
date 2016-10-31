@@ -30,7 +30,7 @@ export default function (router, protectedMiddleware) {
   router.get('/personAttributes', protectedMiddleware, PersonAttributeController.getPersonAttributes);
   router.get('/personAttributes/:cuid', protectedMiddleware, PersonAttributeController.getPersonAttribute);
   router.post('/personAttributes', protectedMiddleware, PersonAttributeController.addPersonAttribute);
-  router.put('/personAttributes:cuid', protectedMiddleware, PersonAttributeController.updatePersonAttribute);
-  router.delete('/personAttributes:cuid', protectedMiddleware, PersonAttributeController.deletePersonAttribute);
+  router.put('/personAttributes/:cuid', protectedMiddleware, PersonAttributeController.updatePersonAttribute);
+  router.delete('/personAttributes/:cuid', protectedMiddleware, PersonAttributeController.deletePersonAttribute);
   return router;
 };

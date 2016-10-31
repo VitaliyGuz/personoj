@@ -2,13 +2,13 @@
  * Created by Vitaliy on 26.10.2016.
  */
 
-import React, {PropTypes} from 'react';
-import {injectIntl, intlShape, FormattedMessage} from 'react-intl'
+import React, {PropTypes} from "react";
+import {injectIntl, intlShape, FormattedMessage} from "react-intl";
 
 // Import Style
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-
+import {Link} from "react-router";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 // Import Components
 
 const styles = {
@@ -17,6 +17,11 @@ const styles = {
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column'
+  },
+  addButton: {
+    position: 'fixed',
+    bottom: '1em',
+    right: '1em'
   }
 }
 
@@ -29,6 +34,12 @@ function PersonList(props) {
           <span>{person.cuid}</span>
         ))
       }
+
+      <Link to="/people/new">
+        <FloatingActionButton style={styles.addButton}>
+          <ContentAdd />
+        </FloatingActionButton>
+      </Link>
     </div>
   )
 }
