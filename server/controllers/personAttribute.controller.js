@@ -85,3 +85,13 @@ export function deletePersonAttribute(req, res) {
     });
   });
 }
+
+
+export function getLocalizationLabels(req, res) {
+  PersonAttribute.find({}, {name: 1, localizationLabel: 1}).exec((err, personAttributes) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({personAttributes});
+  });
+}

@@ -57,8 +57,8 @@ localizationData.ru = ruData;
 localizationData.ru.messages = flattenMessages(localizationData.ru.messages);
 
 import 'intl/locale-data/jsonp/uk';
-import ua from 'react-intl/locale-data/uk';
-import uaData from './localizationData/uk';
-addLocaleData(ua);
-localizationData.ua = uaData;
-localizationData.ua.messages = flattenMessages(localizationData.ua.messages);
+import uk from 'react-intl/locale-data/uk';
+import ukData from './localizationData/uk';
+addLocaleData(uk);
+localizationData.uk = ukData;
+localizationData.uk.messages = flattenMessages(localizationData.uk.messages);
