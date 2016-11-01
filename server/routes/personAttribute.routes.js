@@ -28,7 +28,7 @@ export default function (router, protectedMiddleware) {
   router.route('/personAttributes/:cuid').delete(PersonAttributeController.deletePersonAttribute);*/
 
   router.get('/personAttributes', protectedMiddleware, PersonAttributeController.getPersonAttributes);
-  router.get('/localizationLabels', PersonAttributeController.getLocalizationLabels);
+  router.get('/localizationLabels/:language', PersonAttributeController.getLocalizationLabels);
   router.get('/personAttributes/:cuid', protectedMiddleware, PersonAttributeController.getPersonAttribute);
   router.post('/personAttributes', protectedMiddleware, PersonAttributeController.addPersonAttribute);
   router.put('/personAttributes/:cuid', protectedMiddleware, PersonAttributeController.updatePersonAttribute);

@@ -26,18 +26,12 @@ const styles = {
     display: 'flex',
     flexDirection: 'column'
   }
-}
-
-let selectValue = null;
-
-const handleChange = (event, index, value) => {
-  selectValue = value
-}
+};
 
 function PersonAttributeForm(props) {
   const languageNodes = props.intl.enabledLanguages.map(
-    lang => <TextField key={lang} name={lang} hintText={lang} onChange={props.onLanguageChange}/>
-  )
+    lang => <TextField key={lang} name={lang} hintText={lang} onChange={props.onLabelChange}/>
+  );
   return (
     <div style={styles.container}>
       <h2>
@@ -51,19 +45,17 @@ function PersonAttributeForm(props) {
                    name="type"
                    value={props.type}
                    onChange={props.onChangeSelectField.bind(null, "type")}>
-        <MenuItem value={null} primaryText=""/>
         <MenuItem value={'String'} primaryText={props.intl.messages.string}/>
         <MenuItem value={'Number'} primaryText={props.intl.messages.number}/>
         <MenuItem value={'Date'} primaryText={props.intl.messages.date}/>
         <MenuItem value={'Boolean'} primaryText={props.intl.messages.boolean}/>
       </SelectField>
       <TextField hintText={props.intl.messages.values}
-                 value={props.values}
                  multiLine={true}
                  rows={1}
                  rowsMax={5}
                  name="values"
-                 onChange={props.onChangeTextField}/>
+                 onChange={props.onChangeMultiLineTextField}/>
       <Subheader><FormattedMessage id="localizationLabel"/></Subheader>
       {languageNodes}
       <Checkbox label={props.intl.messages.allowArbitraryValues}

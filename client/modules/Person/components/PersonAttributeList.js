@@ -48,7 +48,7 @@ function PersonAttributeList(props) {
 }
 
 PersonAttributeList.propTypes = {
-  personAttributes: {},
+  personAttributes: PropTypes.array.isRequired,
   intl: intlShape.isRequired,
 };
 
