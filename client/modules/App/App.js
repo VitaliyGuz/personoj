@@ -4,16 +4,16 @@ import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {deepOrange500} from "material-ui/styles/colors";
 import AppBar from "material-ui/AppBar";
+//noinspection JSUnresolvedVariable
 import {Link} from "react-router";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
 import {fetchPeople, fetchPersonAttributes} from "../Person/PersonActions";
+import {fetchLocalizationLabels} from "../Intl/IntlActions";
 
 // Import Style
-
-import {Tabs, Tab} from 'material-ui';
 
 // Import Components
 
@@ -46,6 +46,8 @@ export class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPeople());
     this.props.dispatch(fetchPersonAttributes());
+    //noinspection JSUnresolvedVariable
+    this.props.dispatch(fetchLocalizationLabels(this.props.intl.locale));
     this.setState({isMounted: true}); // eslint-disable-line
     this.setState({open: false}); // eslint-disable-line
   }
@@ -55,6 +57,7 @@ export class App extends Component {
   handleClose = () => this.setState({open: false});
 
   render() {
+    //noinspection JSUnresolvedVariable
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.main}>

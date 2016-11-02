@@ -19,12 +19,20 @@ export class PersonFormPage extends Component {
     this.setState({[event.target.name]: event.target.value});
   };
 
+  onChangeNumberField = (event) => {
+    this.setState({[event.target.name]: parseInt(event.target.value)});
+  };
+
   onChangeSelectField = (event, index, value) => {
     this.setState({[event.target.name]: value});
   };
 
   onChangeCheckbox = (event, isInputChecked) => {
     this.setState({[event.target.name]: isInputChecked});
+  };
+
+  onChangeDatePicker = (name, event, date) => {
+    this.setState({[name]: date});
   };
 
   addPerson = () => {
@@ -37,7 +45,10 @@ export class PersonFormPage extends Component {
         <PersonForm intl={this.props.intl}
                     attributes={this.props.attributes}
                     addPerson={this.addPerson}
-                    onChangeTextField={this.onChangeTextField}>
+                    onChangeTextField={this.onChangeTextField}
+                    onChangeDatePicker={this.onChangeDatePicker}
+                    onChangeCheckbox={this.onChangeCheckbox}
+                    onChangeNumberField={this.onChangeNumberField}>
         </PersonForm>
       </div>
     );

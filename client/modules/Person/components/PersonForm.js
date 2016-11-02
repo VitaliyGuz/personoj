@@ -11,32 +11,57 @@ import {FormattedMessage} from 'react-intl'
 import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
-import SelectField from 'material-ui/SelectField'
+import DatePicker from 'material-ui/DatePicker'
 import MenuItem from 'material-ui/MenuItem'
 
 // Import Components
 
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-};
-
-
+import {container} from '../../../styles/styles'
 
 function PersonForm(props) {
   const attributeNodes = props.attributes.map(
-    attribute =>
-      <TextField key={attribute.name}
-                 hintText={attribute.name}
-                 name={attribute.name}
-                 onChange={props.onChangeTextField}/>
+    attribute => {
+      switch (attribute.type) {
+        case 'String': {
+          return (
+            <TextField key={attribute.name}
+                       hintText={props.intl.labels[attribute.name]}
+                       name={attribute.name}
+                       onChange={props.onChangeTextField}/>
+          )
+        }
+        case 'Number': {
+          return (
+          <TextField key={attribute.name}
+                     hintText={props.intl.labels[attribute.name]}
+                     name={attribute.name}
+                     type="number"
+                     onChange={props.onChangeNumberField}/>
+          )
+        }
+        case 'Date': {
+          return (
+          <DatePicker key={attribute.name}
+                      hintText={props.intl.labels[attribute.name]}
+                      name={attribute.name}
+                      onChange={props.onChangeDatePicker.bind(null, attribute.name)}/>
+          )
+        }
+        case 'Boolean': {
+          return (
+          <Checkbox key={attribute.name}
+                    label={props.intl.labels[attribute.name]}
+                    name={attribute.name}
+                    onCheck={props.onChangeCheckbox}/>
+          )
+        }
+
+
+      }
+    }
   )
   return (
-    <div style={styles.container}>
+    <div style={container}>
       <h2>
         <FormattedMessage id="personAttributeList"/>
       </h2>
