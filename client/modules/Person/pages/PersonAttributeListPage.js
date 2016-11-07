@@ -19,7 +19,7 @@ export class PersonAttributeListPage extends Component {
 
   render() {
     return (
-      <PersonAttributeList personAttributes={this.props.personAttributes}></PersonAttributeList>
+      <PersonAttributeList personAttributes={this.props.personAttributes} intl={this.props.intl}/>
     );
   }
 }
@@ -32,9 +32,10 @@ PersonAttributeListPage.need = [() => {
   return fetchPersonAttributes();
 }];
 
-function mapStateToProps(state, props) {
+function mapStateToProps(store, props) {
   return {
-    personAttributes: getPersonAttributes(state),
+    intl: store.intl,
+    personAttributes: getPersonAttributes(store),
   };
 }
 

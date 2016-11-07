@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 
 import {getPeople} from '../PersonReducer'
 
-import {fetchPeople, fetchPersonAttributes} from "../PersonActions";
+import {fetchPeople, fetchPersonAttributes, confirmPersonChangesRequest} from "../PersonActions";
 
 import PersonList from '../components/PersonList'
 
@@ -19,9 +19,13 @@ export class PersonListPage extends Component {
     props.dispatch(fetchPersonAttributes());
   }
 
+  approve = (quid) => {
+    this.props.dispatch(confirmPersonChangesRequest(quid))
+  };
+
   render() {
     return (
-      <PersonList people={this.props.people}></PersonList>
+      <PersonList people={this.props.people} approve={this.approve}></PersonList>
     );
   }
 }

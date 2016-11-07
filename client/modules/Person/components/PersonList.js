@@ -9,6 +9,8 @@ import {injectIntl, intlShape, FormattedMessage} from "react-intl";
 import {Link} from "react-router";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
+import ActionAssignmentTurnedIn from "material-ui/svg-icons/action/assignment-turned-in";
+import IconButton from 'material-ui/IconButton';
 // Import Components
 
 const styles = {
@@ -31,10 +33,15 @@ function PersonList(props) {
       <h2><FormattedMessage id="personList"/></h2>
       {
         props.people.map(person => (
-          <Link to={`/people/${person.cuid}`}
-                key={person.cuid}>
-            <span>{person.cuid}</span>
-          </Link>
+          <div>
+            <Link to={`/people/${person.cuid}`}
+                  key={person.cuid}>
+              <span>{person.cuid}</span>
+            </Link>
+            <IconButton onClick={props.approve.bind(null, person.cuid)}>
+              <ActionAssignmentTurnedIn></ActionAssignmentTurnedIn>
+            </IconButton>
+          </div>
         ))
       }
 

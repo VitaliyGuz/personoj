@@ -12,6 +12,8 @@ export const ADD_PEOPLE = 'ADD_PEOPLE';
 export const DELETE_PERSON = 'DELETE_PERSON';
 export const ADD_PERSON_ATTRIBUTE = 'ADD_PERSON_ATTRIBUTE';
 export const ADD_PERSON_ATTRIBUTES = 'ADD_PERSON_ATTRIBUTES';
+export const CONFIRM_PERSON_CHANGES = 'CONFIRM_PERSON_CHANGES';
+
 
 // Export Actions
 export function addPerson(person) {
@@ -42,6 +44,13 @@ export function deletePerson(cuid) {
   };
 }
 
+export function confirmPersonChanges(cuid) {
+  return {
+    type: CONFIRM_PERSON_CHANGES,
+    cuid,
+  };
+}
+
 export function addPersonAttribute(personAttribute) {
   return {
     type: ADD_PERSON_ATTRIBUTE,
@@ -55,11 +64,6 @@ export function addPersonAttributes(personAttributes) {
     personAttributes,
   };
 }
-
-
-
-
-
 
 
 export function addPersonRequest(person) {
@@ -104,7 +108,14 @@ export function deletePersonRequest(cuid) {
   };
 }
 
-
+export function confirmPersonChangesRequest(cuid) {
+  return (dispatch) => {
+    return callApi(`confirmPersonChanges/${cuid}`).then(res => {
+        dispatch(replacePerson(res.person));
+      }
+    );
+  };
+}
 
 
 export function addPersonAttributeRequest(personAttribute) {
@@ -129,3 +140,5 @@ export function fetchPersonAttribute(cuid) {
       dispatch(addPersonAttribute(res.personAttribute)));
   };
 }
+
+

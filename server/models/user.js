@@ -10,6 +10,8 @@ const userSchema = new Schema({
   password: { type: 'String', required: true },
   password_salt: { type: 'String', required: true },
   cuid: { type: 'String', required: true },
+  roles: [],
+  peopleProjection: { type: 'String'}
 });
 
 export default mongoose.model('User', userSchema);

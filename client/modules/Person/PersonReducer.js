@@ -2,7 +2,7 @@
  * Created by Vitaliy on 26.10.2016.
  */
 
-import {ADD_PERSON, ADD_PEOPLE, DELETE_PERSON, REPLACE_PERSON, ADD_PERSON_ATTRIBUTE, ADD_PERSON_ATTRIBUTES} from './PersonActions';
+import {ADD_PERSON, ADD_PEOPLE, DELETE_PERSON, REPLACE_PERSON, ADD_PERSON_ATTRIBUTE, ADD_PERSON_ATTRIBUTES, CONFIRM_PERSON_CHANGES} from './PersonActions';
 
 // Initial State
 const initialState = {data: [], attributes: []};

@@ -36,7 +36,7 @@ export function addPersonAttribute(req, res) {
       if (typeof newPersonAttribute[attribute] === 'string') {
         newPersonAttribute[attribute] = sanitizeHtml(newPersonAttribute[attribute]);
       }
-    })
+    });
 
     newPersonAttribute.cuid = cuid();
     newPersonAttribute.save((err, saved) => {
@@ -63,7 +63,7 @@ export function updatePersonAttribute(req, res) {
           if (typeof newPersonAttribute[attribute] === 'string') {
             document[attribute] = sanitizeHtml(newPersonAttribute[attribute]);
           }
-        })
+        });
 
         document.save((err, saved) => {
           if (err) {
@@ -74,6 +74,7 @@ export function updatePersonAttribute(req, res) {
       }
     })
 }
+
 
 export function deletePersonAttribute(req, res) {
   PersonAttribute.findOne({cuid: req.params.cuid}).exec((err, personAttribute) => {
@@ -89,7 +90,7 @@ export function deletePersonAttribute(req, res) {
 
 export function getLocalizationLabels(req, res) {
   let language = req.params.language;
-  let languageQuery = `localizationLabel.${language}`
+  let languageQuery = `localizationLabel.${language}`;
   PersonAttribute.find({}, {name: 1, [languageQuery]: 1}).exec((err, personAttributes) => {
     if (err) {
       res.status(500).send(err);
@@ -97,7 +98,7 @@ export function getLocalizationLabels(req, res) {
     let labels = personAttributes.reduce(function (object, value) {
         object[value.name] = value.localizationLabel[language] || "";
       return object
-    }, {})
+    }, {});
     res.json({labels});
   });
 }

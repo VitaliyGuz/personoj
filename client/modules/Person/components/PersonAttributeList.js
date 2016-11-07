@@ -2,8 +2,11 @@
  * Created by Vitaliy on 28.10.2016.
  */
 
+//noinspection JSUnresolvedVariable
 import React, {PropTypes} from "react";
-import {injectIntl, intlShape, FormattedMessage} from "react-intl";
+//noinspection JSUnresolvedVariable
+import {FormattedMessage} from "react-intl";
+//noinspection JSUnresolvedVariable
 import {Link} from "react-router";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
@@ -24,7 +27,7 @@ const styles = {
     bottom: '1em',
     right: '1em'
   }
-}
+};
 
 function PersonAttributeList(props) {
   return (
@@ -34,7 +37,7 @@ function PersonAttributeList(props) {
         props.personAttributes.map(personAttribute => (
           <Link to={`/person-attributes/${personAttribute.cuid}`}
                 key={personAttribute.cuid}>
-            <span>{personAttribute.cuid}</span>
+            <span>{personAttribute.localizationLabel[props.intl.locale]}</span>
           </Link>
         ))
       }
@@ -49,7 +52,7 @@ function PersonAttributeList(props) {
 
 PersonAttributeList.propTypes = {
   personAttributes: PropTypes.array.isRequired,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
-export default injectIntl(PersonAttributeList);
+export default PersonAttributeList;

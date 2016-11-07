@@ -1,7 +1,7 @@
 export default {
   locale: 'ru',
   messages: {
-    siteTitle: 'MERN Starter Blog',
+    siteTitle: 'Personoj',
     switchLanguage: 'Switch Language',
     userLogin: 'Электронный адресс',
     userPassword: 'Пароль',
@@ -9,7 +9,8 @@ export default {
     registration: 'Зарегастрироваться',
     loginForm: 'Вход',
     enter: 'Войти',
-    personList: 'Граждани',
+    personList: 'Физ лица',
+    person: 'Физ лицо',
     personAttributeList: 'Реквизиты физ лиц',
     name: 'Наименование',
     type: 'Тип',

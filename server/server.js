@@ -9,6 +9,7 @@ import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
 import User from './models/user';
 import Person from './models/person';
 import PersonAttribute from './models/personAttribute';
+import dummyData from './dummyData';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -55,6 +56,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   }
 
   // feed some dummy data in DB.
+  dummyData();
 });
 
 // Apply body Parser and server public assets and routes

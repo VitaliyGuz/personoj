@@ -69,7 +69,7 @@ export default (
              onEnter={requireLoggedIn}
              getComponent={(nextState, cb) => {
                require.ensure([], require => {
-                 cb(null, require('./modules/Person/pages/PersonDetailPage').default);
+                 cb(null, require('./modules/Person/pages/PersonFormPage').default);
                });
              }}/>
     </Route>

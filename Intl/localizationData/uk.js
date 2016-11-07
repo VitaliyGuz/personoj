@@ -1,7 +1,7 @@
 export default {
   locale: 'ua',
   messages: {
-    siteTitle: 'MERN blog de démarrage',
+    siteTitle: 'Personoj',
     switchLanguage: 'Changer de langue',
     userLogin: 'Електронна адреса',
     userPassword: 'Пароль',
@@ -9,7 +9,8 @@ export default {
     registration: 'Зареєструватись',
     loginForm: 'Вхід',
     enter: 'Увійти',
-    personList: 'Громадяни',
+    personList: 'Фіз особи',
+    person: 'Фіз особа',
     personAttributeList: 'Реквізити фіз осіб',
     name: 'Найменування',
     type: 'Тип',

@@ -12,7 +12,6 @@ import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import DatePicker from 'material-ui/DatePicker'
-import MenuItem from 'material-ui/MenuItem'
 
 // Import Components
 
@@ -25,7 +24,8 @@ function PersonForm(props) {
         case 'String': {
           return (
             <TextField key={attribute.name}
-                       hintText={props.intl.labels[attribute.name]}
+                       value={props.person[attribute.name]}
+                       floatingLabelText={props.intl.labels[attribute.name]}
                        name={attribute.name}
                        onChange={props.onChangeTextField}/>
           )
@@ -33,7 +33,8 @@ function PersonForm(props) {
         case 'Number': {
           return (
           <TextField key={attribute.name}
-                     hintText={props.intl.labels[attribute.name]}
+                     value={props.person[attribute.name]}
+                     floatingLabelText={props.intl.labels[attribute.name]}
                      name={attribute.name}
                      type="number"
                      onChange={props.onChangeNumberField}/>
@@ -42,7 +43,8 @@ function PersonForm(props) {
         case 'Date': {
           return (
           <DatePicker key={attribute.name}
-                      hintText={props.intl.labels[attribute.name]}
+                      value={new Date(props.person[attribute.name])}
+                      floatingLabelText={props.intl.labels[attribute.name]}
                       name={attribute.name}
                       onChange={props.onChangeDatePicker.bind(null, attribute.name)}/>
           )
@@ -50,25 +52,24 @@ function PersonForm(props) {
         case 'Boolean': {
           return (
           <Checkbox key={attribute.name}
+                    value={props.person[attribute.name]}
                     label={props.intl.labels[attribute.name]}
                     name={attribute.name}
                     onCheck={props.onChangeCheckbox}/>
           )
         }
-
-
       }
     }
   )
   return (
     <div style={container}>
       <h2>
-        <FormattedMessage id="personAttributeList"/>
+        <FormattedMessage id="person"/>
       </h2>
       {attributeNodes}
       <RaisedButton label={props.intl.messages.save}
                     primary={true}
-                    onClick={props.addPerson}/>
+                    onClick={props.savePerson}/>
     </div>
   )
 }
