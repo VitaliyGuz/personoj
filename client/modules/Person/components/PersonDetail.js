@@ -29,7 +29,7 @@ const styles = {
 
 function PersonDetail(props) {
 
-  const attributeNodes = Object.keys(props.person.published).map((key) => {
+  const attributeNodes = Object.keys(props.person.published || {}).map((key) => {
     return(
       <span>{props.person.published[key]}</span>
     )

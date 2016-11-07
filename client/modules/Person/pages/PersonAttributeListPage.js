@@ -14,6 +14,7 @@ export class PersonAttributeListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+    props.dispatch(fetchPersonAttributes());
   }
 
   render() {
@@ -26,6 +27,10 @@ export class PersonAttributeListPage extends Component {
 PersonAttributeListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
+
+PersonAttributeListPage.need = [() => {
+  return fetchPersonAttributes();
+}];
 
 function mapStateToProps(state, props) {
   return {

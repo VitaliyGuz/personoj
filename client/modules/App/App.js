@@ -10,7 +10,6 @@ import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
-import {fetchPeople, fetchPersonAttributes} from "../Person/PersonActions";
 import {fetchLocalizationLabels} from "../Intl/IntlActions";
 
 // Import Style
@@ -44,8 +43,6 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchPeople());
-    this.props.dispatch(fetchPersonAttributes());
     //noinspection JSUnresolvedVariable
     this.props.dispatch(fetchLocalizationLabels(this.props.intl.locale));
     this.setState({isMounted: true}); // eslint-disable-line
@@ -102,11 +99,7 @@ export class App extends Component {
     );
   }
 }
-App.need = [() => {
-  return fetchPeople();
-}, () => {
-  return fetchPersonAttributes();
-}];
+App.need = [];
 
 App.propTypes = {
   children: PropTypes.object.isRequired,

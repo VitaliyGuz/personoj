@@ -32,6 +32,8 @@ export function signInRequest(creds) {
     return callApi('auth', 'post', creds).then(res => {
       localStorage.setItem('authentication_token', res.token);
       browserHistory.push('/');
+    }).catch((error) => {
+      browserHistory.push('/');
     });
   };
 }

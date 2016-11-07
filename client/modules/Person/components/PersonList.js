@@ -51,4 +51,8 @@ PersonList.propTypes = {
   intl: intlShape.isRequired,
 };
 
+PersonList.defaultProps = {
+  people: {}
+};
+
 export default injectIntl(PersonList);

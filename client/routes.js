@@ -2,12 +2,18 @@
 import React from "react";
 import {Route, IndexRedirect, IndexRoute} from "react-router";
 import App from "./modules/App/App";
+import {isLoggedIn} from "./util/apiCaller";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
     callback(require);
   };
+}
+
+function requireLoggedIn(nextState, replace) {
+  if (!isLoggedIn())
+    replace('/sign_in')
 }
 
 /* Workaround for async react routes to work with react-hot-reloader till
@@ -30,7 +36,7 @@ if (process.env.NODE_ENV !== 'production') {
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
   <Route path="/" component={App}>
-    <IndexRedirect to="/sign_in"/>
+    <IndexRedirect to="/people"/>
     <Route path="/registration"
            getComponent={(nextState, cb) => {
              require.ensure([], require => {
@@ -46,18 +52,21 @@ export default (
            }}
     />
     <Route path="/people">
-      <IndexRoute getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Person/pages/PersonListPage').default);
-        });
-      }}/>
+      <IndexRoute onEnter={requireLoggedIn}
+                  getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/Person/pages/PersonListPage').default);
+                    });
+                  }}/>
       <Route path="new"
+             onEnter={requireLoggedIn}
              getComponent={(nextState, cb) => {
                require.ensure([], require => {
                  cb(null, require('./modules/Person/pages/PersonFormPage').default);
                });
              }}/>
       <Route path=":cuid"
+             onEnter={requireLoggedIn}
              getComponent={(nextState, cb) => {
                require.ensure([], require => {
                  cb(null, require('./modules/Person/pages/PersonDetailPage').default);
@@ -65,18 +74,21 @@ export default (
              }}/>
     </Route>
     <Route path="/person-attributes">
-      <IndexRoute getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Person/pages/PersonAttributeListPage').default);
-        });
-      }}/>
+      <IndexRoute onEnter={requireLoggedIn}
+                  getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/Person/pages/PersonAttributeListPage').default);
+                    });
+                  }}/>
       <Route path="new"
+             onEnter={requireLoggedIn}
              getComponent={(nextState, cb) => {
                require.ensure([], require => {
                  cb(null, require('./modules/Person/pages/PersonAttributeFormPage').default);
                });
              }}/>
       <Route path=":cuid"
+             onEnter={requireLoggedIn}
              getComponent={(nextState, cb) => {
                require.ensure([], require => {
                  cb(null, require('./modules/Person/pages/PersonAttributeDetailPage').default);
