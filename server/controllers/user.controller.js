@@ -2,11 +2,11 @@
  * Created by Vitaliy on 24.10.2016.
  */
 
-import User from '../models/user';
-import cuid from 'cuid';
-import serverConfig from '../config';
-import jwt from 'jwt-simple';
-import {generateRandomToken, sha512} from '../util/security';
+import User from "../models/user";
+import cuid from "cuid";
+import serverConfig from "../config";
+import jwt from "jwt-simple";
+import {generateRandomToken, sha512} from "../util/security";
 
 export function create(req, res) {
   if (!req.body.user.email || !req.body.user.password) {
@@ -38,21 +38,18 @@ export function create(req, res) {
 }
 
 export function update(req, res) {
-  if (!req.body.user.email) {
-    res.status(403).end();
-  } else {
-    let userCuid = jwt.decode(req.headers.authorization.replace('JWT ', ''), serverConfig.JWT_TOKEN).sub;
-    User.findOne({cuid: userCuid})
-      .then(document => {
-        document.email = req.body.user.email;
-        document.isAdmin = req.body.user.isAdmin;
-        return document.save();
-      })
-      .then(saved => {
-        res.json({user: saved});
-      })
-      .catch(err=> {
-        res.status(500).send(err);
-      });
-  }
+  let userCuid = jwt.decode(req.headers.authorization.replace('JWT ', ''), serverConfig.JWT_TOKEN).sub;
+  User.findOne({cuid: userCuid})
+    .then(document => {
+      console.log(req.body.user.personFilter);
+      document.personFilter = req.body.user.personFilter;
+      return document.save();
+    })
+    .then(saved => {
+      res.json({user: saved});
+    })
+    .catch(err=> {
+      res.status(500).send(err);
+    });
+
 }

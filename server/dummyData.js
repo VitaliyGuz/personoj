@@ -110,9 +110,42 @@ export default function () {
         }
       });
 
+      const person2 = new Person({
+        "cuid": "ciux0dt3q0000b0g6fickdk2s",
+        "published": {
+          "firstName": "Johny",
+          "lastName": "Cage",
+          "dateOfBirth": "2009-10-06T15:20:19.124Z",
+          "amountOfChildren": 1
+        }
+      });
+
+      const person3 = new Person({
+        "cuid": "ciuyftksu0000bcg67wapjl2g",
+        "published": {
+          "firstName": "Настя",
+          "lastName": "Каменских",
+          "dateOfBirth": "2005-05-04T15:20:19.124Z",
+          "amountOfChildren": 2
+        }
+      });
+
+      const person4 = new Person({
+        "cuid": "ciuyfukmx0001bcg6w8ijl2cv",
+        "published": {
+          "firstName": "Виктор",
+          "lastName": "Янукович",
+          "dateOfBirth": "2001-03-12T15:20:19.124Z",
+          "amountOfChildren": 4
+        }
+      });
+
 
       Person.create([
-          person1
+          person1,
+          person2,
+          person3,
+          person4
         ],
         (error) => {
           if (!error) {

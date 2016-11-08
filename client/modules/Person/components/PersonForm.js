@@ -24,7 +24,7 @@ function PersonForm(props) {
         case 'String': {
           return (
             <TextField key={attribute.name}
-                       value={props.person[attribute.name]}
+                       value={props.person[attribute.name] ? props.person[attribute.name] : null}
                        floatingLabelText={props.intl.labels[attribute.name]}
                        name={attribute.name}
                        onChange={props.onChangeTextField}/>
@@ -33,7 +33,7 @@ function PersonForm(props) {
         case 'Number': {
           return (
           <TextField key={attribute.name}
-                     value={props.person[attribute.name]}
+                     value={props.person[attribute.name] ? props.person[attribute.name] : null}
                      floatingLabelText={props.intl.labels[attribute.name]}
                      name={attribute.name}
                      type="number"
@@ -43,7 +43,7 @@ function PersonForm(props) {
         case 'Date': {
           return (
           <DatePicker key={attribute.name}
-                      value={new Date(props.person[attribute.name])}
+                      value={props.person[attribute.name] ? new Date(props.person[attribute.name]) : null}
                       floatingLabelText={props.intl.labels[attribute.name]}
                       name={attribute.name}
                       onChange={props.onChangeDatePicker.bind(null, attribute.name)}/>
@@ -52,7 +52,7 @@ function PersonForm(props) {
         case 'Boolean': {
           return (
           <Checkbox key={attribute.name}
-                    value={props.person[attribute.name]}
+                    checked={props.person[attribute.name] ? props.person[attribute.name] : null}
                     label={props.intl.labels[attribute.name]}
                     name={attribute.name}
                     onCheck={props.onChangeCheckbox}/>

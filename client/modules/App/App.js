@@ -4,13 +4,16 @@ import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {deepOrange500} from "material-ui/styles/colors";
 import AppBar from "material-ui/AppBar";
-//noinspection JSUnresolvedVariable
 import {Link} from "react-router";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
 import {fetchLocalizationLabels} from "../Intl/IntlActions";
+import IconButton from "material-ui/IconButton";
+import IconMenu from "material-ui/IconMenu";
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+//noinspection JSUnresolvedVariable
 
 // Import Style
 
@@ -35,6 +38,18 @@ const muiTheme = getMuiTheme({
     accent1Color: deepOrange500,
   }
 });
+
+const Logged = (props) => (
+  <IconMenu {...props}
+            iconButtonElement={
+              <IconButton><MoreVertIcon/></IconButton>
+            }
+            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+            anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+    <Link to="/settings"><MenuItem primaryText="Settings"/></Link>
+    <MenuItem primaryText="Sign out"></MenuItem>
+  </IconMenu>
+)
 
 export class App extends Component {
   constructor(props) {
@@ -74,8 +89,10 @@ export class App extends Component {
               },
             ]}
           />
-          <AppBar title="MERN Starter - Blog App"
-                  onLeftIconButtonTouchTap={this.handleToggle}/>
+          <AppBar title="Personoj"
+                  onLeftIconButtonTouchTap={this.handleToggle}
+                  iconElementRight={<Logged></Logged>}>
+          </AppBar>
           <Drawer
             docked={false}
             width={200}
@@ -87,9 +104,9 @@ export class App extends Component {
           </Drawer>
 
           {/*<Tabs value={pathname}>
-            <Tab label="Home" value="/" linkButton containerElement={<Link to="/"/>}/>
-            <Tab label="Test" value="/test" linkButton containerElement={<Link to="/test"/>}/>
-          </Tabs>*/}
+           <Tab label="Home" value="/" linkButton containerElement={<Link to="/"/>}/>
+           <Tab label="Test" value="/test" linkButton containerElement={<Link to="/test"/>}/>
+           </Tabs>*/}
 
           <div style={styles.container}>
             {this.props.children}

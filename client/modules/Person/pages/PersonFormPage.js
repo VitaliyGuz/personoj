@@ -13,7 +13,7 @@ import {getPerson} from '../PersonReducer';
 export class PersonFormPage extends Component {
   constructor(props) {
     super(props);
-    this.state = props.person.published || {};
+    this.state = props.person ? props.person.published : {};
   }
 
   onChangeTextField = (event) => {

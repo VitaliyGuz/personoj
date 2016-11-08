@@ -51,6 +51,13 @@ export default (
              });
            }}
     />
+    <Route path="/settings"
+           getComponent={(nextState, cb) => {
+             require.ensure([], require => {
+               cb(null, require('./modules/User/pages/SettingsPage').default);
+             });
+           }}
+    />
     <Route path="/people">
       <IndexRoute onEnter={requireLoggedIn}
                   getComponent={(nextState, cb) => {

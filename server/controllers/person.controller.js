@@ -8,7 +8,8 @@ import sanitizeHtml from "sanitize-html";
 
 
 export function getPeople(req, res) {
-  Person.find({}, {published: 1, cuid: 1}).exec((err, people) => {
+  //noinspection JSUnresolvedVariable
+  Person.find(JSON.parse(req.user._doc.personFilter), {published: 1, cuid: 1}).exec((err, people) => {
     if (err) {
       res.status(500).send(err);
     }

@@ -27,6 +27,14 @@ export function addUserRequest(user) {
   };
 }
 
+export function updateUserRequest(user) {
+  return (dispatch) => {
+    return callApi('users/update', 'post', { user }).then(res => {
+      browserHistory.push('/');
+    });
+  };
+}
+
 export function signInRequest(creds) {
   return (dispatch) => {
     return callApi('auth', 'post', creds).then(res => {
