@@ -32,7 +32,6 @@ function PersonList(props) {
   let headers = props.people.reduce((prev, person) => {
     return {...prev, ...Object.keys(person.published)}
   }, {});
-  console.log(headers);
   return (
     <div style={styles.container}>
       <h2><FormattedMessage id="personList"/></h2>

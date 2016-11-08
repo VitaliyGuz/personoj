@@ -22,6 +22,7 @@ export default {
     string: 'Строка',
     number: 'Номер',
     date: 'Дата',
-    boolean: 'Логічний'
+    boolean: 'Логічний',
+    users: 'Користувачі'
   },
 };

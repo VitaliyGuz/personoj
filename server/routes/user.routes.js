@@ -4,8 +4,9 @@
 
 import * as UserController from '../controllers/user.controller';
 
-export default function (router, protectedMiddleware) {
+export default function (router, protectedMiddleware, requireAdministrator) {
+  router.get('/users', protectedMiddleware, requireAdministrator, UserController.getUsers);
   router.post('/users/registration', UserController.create);
-  router.post('/users/update', UserController.update);
+  router.post('/users/update', protectedMiddleware, requireAdministrator, UserController.update);
   return router;
 };

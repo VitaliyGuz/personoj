@@ -58,6 +58,13 @@ export default (
              });
            }}
     />
+    <Route path="/users"
+           getComponent={(nextState, cb) => {
+             require.ensure([], require => {
+               cb(null, require('./modules/User/pages/UserListPage').default);
+             });
+           }}
+    />
     <Route path="/people">
       <IndexRoute onEnter={requireLoggedIn}
                   getComponent={(nextState, cb) => {

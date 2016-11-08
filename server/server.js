@@ -83,10 +83,18 @@ passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
 
 let protectedMiddleware = passport.authenticate('jwt', {session: false});
 
-app.use('/api', users(new Router(), protectedMiddleware))
+function requireAdministrator(req, res, next) {
+  if (req.user._doc.roles.indexOf('Administrator') !== -1) {
+    next();
+  } else {
+    res.status(403).end()
+  }
+}
+
+app.use('/api', users(new Router(), protectedMiddleware, requireAdministrator))
 app.use('/api', auth(new Router(), protectedMiddleware))
-app.use('/api', people(new Router(), protectedMiddleware))
-app.use('/api', personAttributes(new Router(), protectedMiddleware))
+app.use('/api', people(new Router(), protectedMiddleware, requireAdministrator))
+app.use('/api', personAttributes(new Router(), protectedMiddleware, requireAdministrator))
 
 
 

@@ -6,6 +6,8 @@ import callApi from '../../util/apiCaller';
 import {browserHistory} from 'react-router';
 
 export const REPLACE_TOKEN = 'REPLACE_TOKEN';
+export const ADD_USERS = 'ADD_USERS';
+
 
 export function restoreAuthenticationTokenFromCache() {
   let authentication_token
@@ -46,5 +48,18 @@ export function signInRequest(creds) {
   };
 }
 
+export function addUsers(users) {
+  return {
+    type: ADD_USERS,
+    users,
+  };
+}
 
+export function fetchUsers() {
+  return (dispatch) => {
+    return callApi('users').then(res => {
+      dispatch(addUsers(res.users));
+    });
+  };
+}
 

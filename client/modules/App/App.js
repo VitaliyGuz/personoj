@@ -99,6 +99,7 @@ export class App extends Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}
           >
+            <Link to="/users"><MenuItem primaryText="Users" onTouchTap={this.handleClose}/></Link>
             <Link to="/people"><MenuItem primaryText="People" onTouchTap={this.handleClose}/></Link>
             <Link to="/person-attributes"><MenuItem primaryText="Attributes" onTouchTap={this.handleClose}/></Link>
           </Drawer>

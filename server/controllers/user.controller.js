@@ -8,6 +8,16 @@ import serverConfig from "../config";
 import jwt from "jwt-simple";
 import {generateRandomToken, sha512} from "../util/security";
 
+export function getUsers(req, res) {
+  //noinspection JSUnresolvedVariable
+  User.find({}, {cuid: 1, email: 1, roles: 1, personFilter: 1}).exec((err, users) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({users});
+  });
+}
+
 export function create(req, res) {
   if (!req.body.user.email || !req.body.user.password) {
     res.status(403).end();
@@ -38,6 +48,7 @@ export function create(req, res) {
 }
 
 export function update(req, res) {
+  //noinspection JSUnresolvedVariable
   let userCuid = jwt.decode(req.headers.authorization.replace('JWT ', ''), serverConfig.JWT_TOKEN).sub;
   User.findOne({cuid: userCuid})
     .then(document => {
@@ -51,5 +62,5 @@ export function update(req, res) {
     .catch(err=> {
       res.status(500).send(err);
     });
-
 }
+
