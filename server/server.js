@@ -1,14 +1,13 @@
-import Express, {Router} from 'express';
+//noinspection JSUnresolvedVariable
+import Express, { Router } from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 import passport from 'passport';
-import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import User from './models/user';
-import Person from './models/person';
-import PersonAttribute from './models/personAttribute';
 import dummyData from './dummyData';
 
 // Webpack Requirements
@@ -23,7 +22,7 @@ const app = new Express();
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}));
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
 
@@ -31,7 +30,9 @@ if (process.env.NODE_ENV === 'development') {
 import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
 import React from 'react';
+//noinspection JSUnresolvedVariable
 import { renderToString } from 'react-dom/server';
+//noinspection JSUnresolvedVariable
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
 
@@ -61,8 +62,9 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
-app.use(bodyParser.json({limit: '20mb'}));
-app.use(bodyParser.urlencoded({limit: '20mb', extended: false}));
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+//noinspection JSUnresolvedVariable
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 
 var opts = {};
@@ -70,7 +72,7 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = serverConfig.JWT_TOKEN;
 
 passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-  User.findOne({cuid: jwt_payload.sub}).then(user => {
+  User.findOne({ cuid: jwt_payload.sub }).then(user => {
     if (user) {
       done(null, user);
     } else {
@@ -81,7 +83,8 @@ passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
   });
 }));
 
-let protectedMiddleware = passport.authenticate('jwt', {session: false});
+//noinspection JSUnresolvedFunction
+let protectedMiddleware = passport.authenticate('jwt', { session: false });
 
 function requireAdministrator(req, res, next) {
   if (req.user._doc.roles.indexOf('Administrator') !== -1) {
@@ -97,9 +100,9 @@ app.use('/api', people(new Router(), protectedMiddleware, requireAdministrator))
 app.use('/api', personAttributes(new Router(), protectedMiddleware, requireAdministrator))
 
 
-
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
+  //noinspection JSUnresolvedFunction
   const head = Helmet.rewind();
 
   // Import Manifests
@@ -125,7 +128,7 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
-          `//<![CDATA[
+    `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
         </script>

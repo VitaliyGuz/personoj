@@ -3,9 +3,9 @@
  */
 
 //noinspection JSUnresolvedVariable
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 //noinspection JSUnresolvedVariable
-import {FormattedMessage} from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 // Import Style
 import TextField from 'material-ui/TextField'
@@ -15,7 +15,7 @@ import DatePicker from 'material-ui/DatePicker'
 
 // Import Components
 
-import {container} from '../../../styles/styles'
+import { container } from '../../../styles/styles'
 
 function PersonForm(props) {
   const attributeNodes = props.attributes.map(
@@ -32,35 +32,35 @@ function PersonForm(props) {
         }
         case 'Number': {
           return (
-          <TextField key={attribute.name}
-                     value={props.person[attribute.name] ? props.person[attribute.name] : null}
-                     floatingLabelText={props.intl.labels[attribute.name]}
-                     name={attribute.name}
-                     type="number"
-                     onChange={props.onChangeNumberField}/>
+            <TextField key={attribute.name}
+                       value={props.person[attribute.name] ? props.person[attribute.name] : null}
+                       floatingLabelText={props.intl.labels[attribute.name]}
+                       name={attribute.name}
+                       type="number"
+                       onChange={props.onChangeNumberField}/>
           )
         }
         case 'Date': {
           return (
-          <DatePicker key={attribute.name}
-                      value={props.person[attribute.name] ? new Date(props.person[attribute.name]) : null}
-                      floatingLabelText={props.intl.labels[attribute.name]}
-                      name={attribute.name}
-                      onChange={props.onChangeDatePicker.bind(null, attribute.name)}/>
+            <DatePicker key={attribute.name}
+                        value={props.person[attribute.name] ? new Date(props.person[attribute.name]) : null}
+                        floatingLabelText={props.intl.labels[attribute.name]}
+                        name={attribute.name}
+                        onChange={props.onChangeDatePicker.bind(null, attribute.name)}/>
           )
         }
         case 'Boolean': {
           return (
-          <Checkbox key={attribute.name}
-                    checked={props.person[attribute.name] ? props.person[attribute.name] : null}
-                    label={props.intl.labels[attribute.name]}
-                    name={attribute.name}
-                    onCheck={props.onChangeCheckbox}/>
+            <Checkbox key={attribute.name}
+                      checked={props.person[attribute.name] ? props.person[attribute.name] : null}
+                      label={props.intl.labels[attribute.name]}
+                      name={attribute.name}
+                      onCheck={props.onChangeCheckbox}/>
           )
         }
       }
     }
-  )
+  );
   return (
     <div style={container}>
       <h2>

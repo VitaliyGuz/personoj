@@ -16,7 +16,7 @@ injectTapEventPlugin();
 
 render(
   <AppContainer>
-    <App store={store} />
+    <App store={store}/>
   </AppContainer>,
   mountApp
 );
@@ -29,7 +29,7 @@ if (module.hot) {
     const NextApp = require('./App').default; // eslint-disable-line global-require
     render(
       <AppContainer>
-        <NextApp store={store} />
+        <NextApp store={store}/>
       </AppContainer>,
       mountApp
     );

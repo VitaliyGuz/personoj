@@ -2,38 +2,26 @@
  * Created by Vitaliy on 26.10.2016.
  */
 
-import React, {PropTypes} from "react";
-import {injectIntl, intlShape, FormattedMessage} from "react-intl";
-import {Link} from "react-router";
+//noinspection JSUnresolvedVariable
+import React, { PropTypes } from "react";
+//noinspection JSUnresolvedVariable
+import { FormattedMessage } from "react-intl";
+//noinspection JSUnresolvedVariable
+import { Link } from "react-router";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import {Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn} from "material-ui/Table";
+import { Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn } from "material-ui/Table";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import ActionAssignmentTurnedIn from "material-ui/svg-icons/action/assignment-turned-in";
 import IconButton from "material-ui/IconButton";
+import { container, addButton } from '../../../styles/styles'
 
-// Import Style
-// Import Components
-
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  addButton: {
-    position: 'fixed',
-    bottom: '1em',
-    right: '1em'
-  }
-}
 
 function PersonList(props) {
   let headers = props.people.reduce((prev, person) => {
-    return {...prev, ...Object.keys(person.published)}
+    return { ...prev, ...Object.keys(person.published) }
   }, {});
   return (
-    <div style={styles.container}>
+    <div style={container}>
       <h2><FormattedMessage id="personList"/></h2>
       <Table>
         <TableHeader>
@@ -56,7 +44,7 @@ function PersonList(props) {
               <TableRow key={person.cuid}>
                 {
                   Object.keys(headers).map(header => {
-                    let key = headers[header]
+                    let key = headers[header];
                     return (
                       <TableRowColumn key={header}>
                         <Link to={`/people/${person.cuid}`}
@@ -78,7 +66,7 @@ function PersonList(props) {
         </TableBody>
       </Table>
       <Link to="/people/new">
-        <FloatingActionButton style={styles.addButton}>
+        <FloatingActionButton style={addButton}>
           <ContentAdd />
         </FloatingActionButton>
       </Link>
@@ -87,11 +75,11 @@ function PersonList(props) {
 }
 
 PersonList.propTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 PersonList.defaultProps = {
   people: {}
 };
 
-export default injectIntl(PersonList);
+export default PersonList;

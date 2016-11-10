@@ -2,10 +2,11 @@
  * Created by Vitaliy on 28.10.2016.
  */
 
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+//noinspection JSUnresolvedVariable
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-import {getPersonAttribute} from '../PersonReducer'
+import { getPersonAttribute } from '../PersonReducer'
 
 export class PersonAttributeDetailPage extends Component {
   constructor(props) {

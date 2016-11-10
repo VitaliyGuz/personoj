@@ -2,10 +2,10 @@
  * Created by Vitaliy on 21.10.2016.
  */
 
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-import {signInRequest}from '../UserAction'
+import { signInRequest }from '../UserAction'
 
 import Login from '../components/Login'
 
@@ -16,11 +16,11 @@ export class SignInPage extends Component {
   }
 
   onChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   signIn = () => {
-    let user = {email: this.state.email, password: this.state.password};
+    let user = { email: this.state.email, password: this.state.password };
     this.props.dispatch(signInRequest(user))
   };
 

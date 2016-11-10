@@ -3,35 +3,19 @@
  */
 
 //noinspection JSUnresolvedVariable
-import React, {PropTypes} from "react";
+import React, { PropTypes } from "react";
 //noinspection JSUnresolvedVariable
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from "react-intl";
 //noinspection JSUnresolvedVariable
-import {Link} from "react-router";
+import { Link } from "react-router";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
+import { container, addButton } from '../../../styles/styles';
 
-// Import Style
-
-// Import Components
-
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  addButton: {
-    position: 'fixed',
-    bottom: '1em',
-    right: '1em'
-  }
-};
 
 function PersonAttributeList(props) {
   return (
-    <div style={styles.container}>
+    <div style={container}>
       <h2><FormattedMessage id="personAttributeList"/></h2>
       {
         props.personAttributes.map(personAttribute => (
@@ -42,7 +26,7 @@ function PersonAttributeList(props) {
         ))
       }
       <Link to="/person-attributes/new">
-        <FloatingActionButton style={styles.addButton}>
+        <FloatingActionButton style={addButton}>
           <ContentAdd />
         </FloatingActionButton>
       </Link>

@@ -3,12 +3,12 @@
  */
 
 
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 
-import {updateUserRequest} from "./../UserAction"
+import { updateUserRequest } from "./../UserAction"
 
 export class SettingsPage extends Component {
   constructor(props) {
@@ -17,11 +17,11 @@ export class SettingsPage extends Component {
   }
 
   onChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   save = () => {
-    let user = {personFilter: this.state.personFilter};
+    let user = { personFilter: this.state.personFilter };
     this.props.dispatch(updateUserRequest(user))
   };
 

@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
-import {restoreAuthenticationTokenFromCache} from '../client/modules/User/UserAction';
+import { restoreAuthenticationTokenFromCache } from '../client/modules/User/UserAction';
 
 export function configureStore(initialState = {}) {
   // Middleware and store enhancers

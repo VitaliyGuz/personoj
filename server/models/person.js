@@ -9,7 +9,7 @@ const personSchema = new Schema({
   published: {},
   draft: {},
   history: {},
-  cuid: {type: 'String', required: true},
+  cuid: { type: 'String', required: true },
 });
 
 export default mongoose.model('Person', personSchema);

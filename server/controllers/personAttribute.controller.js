@@ -11,16 +11,16 @@ export function getPersonAttributes(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({personAttributes});
+    res.json({ personAttributes });
   });
 }
 
 export function getPersonAttribute(req, res) {
-  PersonAttribute.findOne({cuid: req.params.cuid}).exec((err, personAttribute) => {
+  PersonAttribute.findOne({ cuid: req.params.cuid }).exec((err, personAttribute) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({personAttribute});
+    res.json({ personAttribute });
   });
 }
 
@@ -43,7 +43,7 @@ export function addPersonAttribute(req, res) {
       if (err) {
         res.status(500).send(err);
       }
-      res.json({personAttribute: saved});
+      res.json({ personAttribute: saved });
     });
   }
 }
@@ -51,7 +51,7 @@ export function addPersonAttribute(req, res) {
 
 export function updatePersonAttribute(req, res) {
 
-  PersonAttribute.findOne({cuid: req.params.cuid})
+  PersonAttribute.findOne({ cuid: req.params.cuid })
     .then(document => {
       if (!req.body.person) {
         res.status(403).end();
@@ -69,7 +69,7 @@ export function updatePersonAttribute(req, res) {
           if (err) {
             res.status(500).send(err);
           }
-          res.json({personAttribute: saved});
+          res.json({ personAttribute: saved });
         });
       }
     })
@@ -77,7 +77,7 @@ export function updatePersonAttribute(req, res) {
 
 
 export function deletePersonAttribute(req, res) {
-  PersonAttribute.findOne({cuid: req.params.cuid}).exec((err, personAttribute) => {
+  PersonAttribute.findOne({ cuid: req.params.cuid }).exec((err, personAttribute) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -91,14 +91,14 @@ export function deletePersonAttribute(req, res) {
 export function getLocalizationLabels(req, res) {
   let language = req.params.language;
   let languageQuery = `localizationLabel.${language}`;
-  PersonAttribute.find({}, {name: 1, [languageQuery]: 1}).exec((err, personAttributes) => {
+  PersonAttribute.find({}, { name: 1, [languageQuery]: 1 }).exec((err, personAttributes) => {
     if (err) {
       res.status(500).send(err);
     }
     let labels = personAttributes.reduce(function (object, value) {
-        object[value.name] = value.localizationLabel[language] || "";
+      object[value.name] = value.localizationLabel[language] || "";
       return object
     }, {});
-    res.json({labels});
+    res.json({ labels });
   });
 }

@@ -2,18 +2,19 @@
  * Created by Vitaliy on 28.10.2016.
  */
 
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+//noinspection JSUnresolvedVariable
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-import {getPersonAttributes} from '../PersonReducer'
-import {fetchPersonAttributes} from '../PersonActions';
+import { getPersonAttributes } from '../PersonReducer'
+import { fetchPersonAttributes } from '../PersonActions';
 
 import PersonAttributeList from '../components/PersonAttributeList'
 
 export class PersonAttributeListPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
     props.dispatch(fetchPersonAttributes());
   }
 
@@ -32,7 +33,7 @@ PersonAttributeListPage.need = [() => {
   return fetchPersonAttributes();
 }];
 
-function mapStateToProps(store, props) {
+function mapStateToProps(store,) {
   return {
     intl: store.intl,
     personAttributes: getPersonAttributes(store),

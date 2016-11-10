@@ -3,7 +3,8 @@
  */
 
 import callApi from '../../util/apiCaller';
-import {browserHistory} from 'react-router';
+//noinspection JSUnresolvedVariable
+import { browserHistory } from 'react-router';
 
 // Export Constants
 export const ADD_PERSON = 'ADD_PERSON';

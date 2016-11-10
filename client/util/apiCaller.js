@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import Config from '../../server/config';
 //noinspection JSUnresolvedVariable
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 //noinspection JSUnresolvedVariable
 export const API_URL = (typeof window === 'undefined' || process.env.NODE_ENV === 'test') ?
@@ -36,7 +36,7 @@ const parseJSON = (response) => {
 export default function callApi(endpoint, method = 'get', body) {
   //noinspection JSUnresolvedFunction
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: {'Content-Type': 'application/json', "Authorization": 'JWT ' + getAuthenticationToken()},
+    headers: { 'Content-Type': 'application/json', "Authorization": 'JWT ' + getAuthenticationToken() },
     method,
     body: JSON.stringify(body),
   })

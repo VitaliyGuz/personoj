@@ -3,27 +3,18 @@
  */
 
 
-import React, {PropTypes} from 'react';
-import {injectIntl, intlShape, FormattedMessage} from 'react-intl'
-
-// Import Style
+//noinspection JSUnresolvedVariable
+import React, { PropTypes } from 'react';
+//noinspection JSUnresolvedVariable
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { container } from '../../../styles/styles'
 
-// Import Components
-
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-}
 
 function Login(props) {
   return (
-    <div style={styles.container}>
+    <div style={container}>
       {props.addUser ? <h2><FormattedMessage id="registrationForm"/></h2> : null}
       {props.signIn ? <h2><FormattedMessage id="loginForm"/></h2> : null}
       <TextField hintText={props.intl.messages.userLogin}

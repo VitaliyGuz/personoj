@@ -3,11 +3,11 @@
  */
 
 //noinspection JSUnresolvedVariable
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
 import PersonForm from "../components/PersonForm";
-import {addPersonRequest, updatePersonRequest} from "../PersonActions";
-import {getPerson} from '../PersonReducer';
+import { addPersonRequest, updatePersonRequest } from "../PersonActions";
+import { getPerson } from '../PersonReducer';
 
 
 export class PersonFormPage extends Component {
@@ -17,23 +17,23 @@ export class PersonFormPage extends Component {
   }
 
   onChangeTextField = (event) => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   onChangeNumberField = (event) => {
-    this.setState({[event.target.name]: parseInt(event.target.value)});
+    this.setState({ [event.target.name]: parseInt(event.target.value) });
   };
 
   onChangeSelectField = (event, index, value) => {
-    this.setState({[event.target.name]: value});
+    this.setState({ [event.target.name]: value });
   };
 
   onChangeCheckbox = (event, isInputChecked) => {
-    this.setState({[event.target.name]: isInputChecked});
+    this.setState({ [event.target.name]: isInputChecked });
   };
 
   onChangeDatePicker = (name, event, date) => {
-    this.setState({[name]: date});
+    this.setState({ [name]: date });
   };
 
   savePerson = () => {

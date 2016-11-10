@@ -3,40 +3,30 @@
  */
 
 //noinspection JSUnresolvedVariable
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 //noinspection JSUnresolvedVariable
-import {FormattedMessage} from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
-// Import Style
+import { container } from '../../../styles/styles'
+
+
 import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-// Import Components
-
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-};
-
-
 
 function PersonDetail(props) {
 
   const attributeNodes = Object.keys(props.person.published || {}).map((key) => {
-    return(
+    return (
       <span>{props.person.published[key]}</span>
     )
   })
 
   return (
-    <div style={styles.container}>
+    <div style={container}>
       <h2>
         <FormattedMessage id="personAttributeList"/>
       </h2>

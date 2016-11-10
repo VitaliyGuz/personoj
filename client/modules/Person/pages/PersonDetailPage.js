@@ -2,6 +2,7 @@
  * Created by Vitaliy on 26.10.2016.
  */
 
+//noinspection JSUnresolvedVariable
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 

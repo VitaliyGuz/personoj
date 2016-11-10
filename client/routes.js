@@ -1,8 +1,8 @@
 /* eslint-disable global-require */
 import React from "react";
-import {Route, IndexRedirect, IndexRoute} from "react-router";
+import { Route, IndexRedirect, IndexRoute } from "react-router";
 import App from "./modules/App/App";
-import {isLoggedIn} from "./util/apiCaller";
+import { isLoggedIn } from "./util/apiCaller";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {

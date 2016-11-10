@@ -3,37 +3,25 @@
  */
 
 //noinspection JSUnresolvedVariable
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from "react";
 //noinspection JSUnresolvedVariable
-import {FormattedMessage} from 'react-intl'
-
-// Import Style
-import TextField from 'material-ui/TextField'
-import Checkbox from 'material-ui/Checkbox'
-import RaisedButton from 'material-ui/RaisedButton'
-import MenuItem from 'material-ui/MenuItem'
-import SelectField from 'material-ui/SelectField'
-import Subheader from 'material-ui/Subheader'
-
+import { FormattedMessage } from "react-intl";
+import TextField from "material-ui/TextField";
+import Checkbox from "material-ui/Checkbox";
+import RaisedButton from "material-ui/RaisedButton";
+import MenuItem from "material-ui/MenuItem";
+import SelectField from "material-ui/SelectField";
+import Subheader from "material-ui/Subheader";
+import { container } from "../../../styles/styles";
 
 
-// Import Components
-
-const styles = {
-  container: {
-    padding: '1.5em',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-};
 
 function PersonAttributeForm(props) {
   const languageNodes = props.intl.enabledLanguages.map(
     lang => <TextField key={lang} name={lang} hintText={lang} onChange={props.onLabelChange}/>
   );
   return (
-    <div style={styles.container}>
+    <div style={container}>
       <h2>
         <FormattedMessage id="personAttributeList"/>
       </h2>

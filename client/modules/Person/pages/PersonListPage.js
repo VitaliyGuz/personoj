@@ -2,19 +2,20 @@
  * Created by Vitaliy on 25.10.2016.
  */
 
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+//noinspection JSUnresolvedVariable
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-import {getPeople} from '../PersonReducer'
+import { getPeople } from '../PersonReducer'
 
-import {fetchPeople, fetchPersonAttributes, confirmPersonChangesRequest} from "../PersonActions";
+import { fetchPeople, fetchPersonAttributes, confirmPersonChangesRequest } from "../PersonActions";
 
 import PersonList from '../components/PersonList'
 
 export class PersonListPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
     props.dispatch(fetchPeople());
     props.dispatch(fetchPersonAttributes());
   }
@@ -25,7 +26,7 @@ export class PersonListPage extends Component {
 
   render() {
     return (
-      <PersonList people={this.props.people} approve={this.approve}></PersonList>
+      <PersonList people={this.props.people} approve={this.approve} intl={this.props.intl}></PersonList>
     );
   }
 }
@@ -44,9 +45,10 @@ PersonListPage.defaultProps = {
   people: {}
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(store) {
   return {
-    people: getPeople(state) || {}  ,
+    people: getPeople(state) || {},
+    intl: store.intl,
   };
 }
 

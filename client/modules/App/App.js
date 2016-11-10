@@ -1,37 +1,21 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
+
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import {deepOrange500} from "material-ui/styles/colors";
+import { deepOrange500 } from "material-ui/styles/colors";
 import AppBar from "material-ui/AppBar";
-import {Link} from "react-router";
+import { Link } from "react-router";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
-import {fetchLocalizationLabels} from "../Intl/IntlActions";
+import { fetchLocalizationLabels } from "../Intl/IntlActions";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-//noinspection JSUnresolvedVariable
+import { main, mainContainer } from "../../styles/styles";
 
-// Import Style
-
-// Import Components
-
-// Import Actions
-
-const styles = {
-  main: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  container: {
-    maxWidth: 980,
-    paddingTop: 100,
-    margin: '0 auto'
-  }
-};
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -44,41 +28,41 @@ const Logged = (props) => (
             iconButtonElement={
               <IconButton><MoreVertIcon/></IconButton>
             }
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>
     <Link to="/settings"><MenuItem primaryText="Settings"/></Link>
     <MenuItem primaryText="Sign out"></MenuItem>
   </IconMenu>
-)
+);
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {isMounted: false};
+    this.state = { isMounted: false };
   }
 
   componentDidMount() {
     //noinspection JSUnresolvedVariable
     this.props.dispatch(fetchLocalizationLabels(this.props.intl.locale));
-    this.setState({isMounted: true}); // eslint-disable-line
-    this.setState({open: false}); // eslint-disable-line
+    this.setState({ isMounted: true }); // eslint-disable-line
+    this.setState({ open: false }); // eslint-disable-line
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle = () => this.setState({ open: !this.state.open });
 
-  handleClose = () => this.setState({open: false});
+  handleClose = () => this.setState({ open: false });
 
   render() {
     //noinspection JSUnresolvedVariable
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.main}>
+        <div style={main}>
           {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <Helmet
-            title="MERN Starter - Blog App"
+            title="Personoj"
             titleTemplate="%s - Blog App"
             meta={[
-              {charset: 'utf-8'},
+              { charset: 'utf-8' },
               {
                 'http-equiv': 'X-UA-Compatible',
                 content: 'IE=edge',
@@ -97,7 +81,7 @@ export class App extends Component {
             docked={false}
             width={200}
             open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
+            onRequestChange={(open) => this.setState({ open })}
           >
             <Link to="/users"><MenuItem primaryText="Users" onTouchTap={this.handleClose}/></Link>
             <Link to="/people"><MenuItem primaryText="People" onTouchTap={this.handleClose}/></Link>
@@ -109,7 +93,7 @@ export class App extends Component {
            <Tab label="Test" value="/test" linkButton containerElement={<Link to="/test"/>}/>
            </Tabs>*/}
 
-          <div style={styles.container}>
+          <div style={mainContainer}>
             {this.props.children}
           </div>
         </div>

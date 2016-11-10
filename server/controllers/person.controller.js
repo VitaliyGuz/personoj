@@ -9,21 +9,21 @@ import sanitizeHtml from "sanitize-html";
 
 export function getPeople(req, res) {
   //noinspection JSUnresolvedVariable
-  Person.find(JSON.parse(req.user._doc.personFilter), {published: 1, cuid: 1}).exec((err, people) => {
+  Person.find(JSON.parse(req.user._doc.personFilter), { published: 1, cuid: 1 }).exec((err, people) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({people});
+    res.json({ people });
   });
 }
 
 
 export function getPerson(req, res) {
-  Person.findOne({cuid: req.params.cuid}, {published: 1}).exec((err, person) => {
+  Person.findOne({ cuid: req.params.cuid }, { published: 1 }).exec((err, person) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({person});
+    res.json({ person });
   });
 }
 
@@ -49,21 +49,21 @@ export function addPerson(req, res) {
       if (err) {
         res.status(500).send(err);
       }
-      res.json({person: saved});
+      res.json({ person: saved });
     });
   }
 }
 
 
 export function confirmPersonChanges(req, res) {
-  Person.findOne({cuid: req.params.cuid}).exec((err, person) => {
+  Person.findOne({ cuid: req.params.cuid }).exec((err, person) => {
     if (err) {
       res.status(500).send(err);
     }
     if (Object.keys(person.draft || {}).length !== 0) {
       if (Object.keys(person.published || {}).length !== 0) {
         let nextIndex = Object.keys(person.history || {}).length + 1;
-        let historyItem = {[nextIndex]: {person: person.published, dateRetired: new Date()}};
+        let historyItem = { [nextIndex]: { person: person.published, dateRetired: new Date() } };
         person.history = Object.assign(person.history || {}, historyItem);
       }
       person.published = person.draft;
@@ -72,10 +72,10 @@ export function confirmPersonChanges(req, res) {
         if (err) {
           res.status(500).send(err);
         }
-        res.json({person: saved});
+        res.json({ person: saved });
       });
     } else {
-      res.json({person: person});
+      res.json({ person: person });
     }
   });
 }
@@ -83,7 +83,7 @@ export function confirmPersonChanges(req, res) {
 
 export function updatePerson(req, res) {
 
-  Person.findOne({cuid: req.params.cuid})
+  Person.findOne({ cuid: req.params.cuid })
     .then(document => {
       if (!req.body.person) {
         res.status(403).end();
@@ -107,7 +107,7 @@ export function updatePerson(req, res) {
           if (err) {
             res.status(500).send(err);
           }
-          res.json({person: saved});
+          res.json({ person: saved });
         });
       }
     })
@@ -115,7 +115,7 @@ export function updatePerson(req, res) {
 
 
 export function deletePerson(req, res) {
-  Person.findOne({cuid: req.params.cuid}).exec((err, person) => {
+  Person.findOne({ cuid: req.params.cuid }).exec((err, person) => {
     if (err) {
       res.status(500).send(err);
     }

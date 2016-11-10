@@ -11,7 +11,7 @@ const userSchema = new Schema({
   password_salt: { type: 'String', required: true },
   cuid: { type: 'String', required: true },
   roles: [],
-  personFilter: { type: 'String', default: '{}'}
+  personFilter: { type: 'String', default: '{}' }
 });
 
 export default mongoose.model('User', userSchema);

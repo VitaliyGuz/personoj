@@ -3,7 +3,7 @@
  */
 
 import callApi from '../../util/apiCaller';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 export const REPLACE_TOKEN = 'REPLACE_TOKEN';
 export const ADD_USERS = 'ADD_USERS';
@@ -22,7 +22,7 @@ export function restoreAuthenticationTokenFromCache() {
 
 export function addUserRequest(user) {
   return (dispatch) => {
-    return callApi('users/registration', 'post', {user}).then(res => {
+    return callApi('users/registration', 'post', { user }).then(res => {
       localStorage.setItem('authentication_token', res.token);
       browserHistory.push('/');
     });

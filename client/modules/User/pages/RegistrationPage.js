@@ -2,12 +2,13 @@
  * Created by Vitaliy on 21.10.2016.
  */
 
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+//noinspection JSUnresolvedVariable
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 import Login from '../components/Login'
 
-import {addUserRequest} from '../UserAction'
+import { addUserRequest } from '../UserAction'
 
 export class RegistrationPage extends Component {
   constructor(props) {
@@ -16,11 +17,11 @@ export class RegistrationPage extends Component {
   }
 
   onChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   addUser = () => {
-    let user = {email: this.state.email, password: this.state.password};
+    let user = { email: this.state.email, password: this.state.password };
     this.props.dispatch(addUserRequest(user))
   };
 
